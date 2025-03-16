@@ -1,41 +1,26 @@
 ﻿
-
-# Definir la variable de puntos (depresión)
-default puntos = 50
+# Definir la variable de puntos (depresion)
+default puntos = 40
 
 # Definir los personajes
 define yuki = Character("Yuki", color="#A0A0A0")
 define hana = Character("Hana", color="#FF66CC")
 define ren = Character("Ren", color="#33CCFF")
 
-# Fondo y música
-image bg school = "school.jpg"
-image bg home = "home.jpg"
-
-
-
-# Definir la pantalla del contador con delineado azul claro
-# Definir un estilo para el texto
-# Definir un estilo para el texto
 # Definimos el estilo para los puntos
-# Definir el estilo directamente con define
 define style_puntos_text = "default"
- 
-# Luego en la pantalla, puedes modificar las propiedades del estilo como se muestra:
 screen depresion_counter():
 
     # Mostrar el texto con el estilo definido
     text "Puntos: [puntos]" xalign 0.0 yalign 0.0 style "puntos_text"
 
-
-
-
+# ============================================================================================================================================
 
 label start:
-    # Muestra la pantalla de depresión en todo momento
+    # Muestra la pantalla de puntos (depresion) en todo momento
     show screen depresion_counter
 
-    # Introducción
+    # Introduccion
     scene bg school
     yuki "Hoy es el último día antes de las vacaciones. Me siento extraño... no estoy seguro si quiero que lleguen."
     hana "¡Vas a disfrutar mucho las vacaciones, Yuki! ¡No seas tan negativo!" 
@@ -44,10 +29,12 @@ label start:
 
     yuki "Las vacaciones comenzarán, pero algo no se siente bien."
 
-    # Aumenta los puntos
-    $ puntos += 10
+    # Aumenta los puntos (Tristeza) por la despedida???
+    $ puntos += 20
 
     jump dia_1
+
+# =============================================================================================================================================
 
 label dia_1:
     scene bg home
@@ -74,6 +61,8 @@ label dia_1:
 
     jump dia_2
 
+# =============================================================================================================================================
+
 label dia_2:
     # Segundo día con otra elección
     scene bg home
@@ -96,12 +85,9 @@ label dia_2:
 
     yuki "Este día ha sido igual que el anterior..."
 
-
-
-
-
-
     jump dia_3
+
+# =============================================================================================================================================
 
 # **Tercer día de vacaciones**
 label dia_3:
@@ -128,6 +114,8 @@ label dia_3:
 
     jump dia_4
 
+# =============================================================================================================================================
+
 # **Cuarto día de vacaciones**
 label dia_4:
 
@@ -152,6 +140,8 @@ label dia_4:
     yuki "Parece que las cosas están mejorando un poco... Tal vez haya algo de esperanza."
 
     jump dia_5
+
+# =============================================================================================================================================
 
 # **Quinto día de vacaciones**
 label dia_5:
@@ -178,8 +168,9 @@ label dia_5:
 
     jump dia_6
 
-# **Sexto día de vacaciones (Final)**
+# =============================================================================================================================================
 
+# **Sexto día de vacaciones (Final)**
 label dia_6:
 
     yuki "Último día de vacaciones. No sé si estoy mejor o peor."
@@ -195,24 +186,46 @@ label dia_6:
             $ puntos += 8  # Empeora la depresión al seguir aislándose
             yuki "La soledad se siente más pesada que nunca. Me siento atrapado."
 
-    if puntos >= 80:
+# =============================================================================================================================================
+
+# Se calcula que final se consiguio
+    if puntos > 100:
+        jump final_muy_malo
+    elif puntos >= 80:
         jump final_triste
     elif puntos <= 30:
         jump final_positivo
     else:
         jump final_neutro
 
+# ============================================================================================================================================
+
+# **Final muy malo**
+label final_muy_malo:
+    yuki "He hecho todo mal... No importa cuánto lo intente, nada parece mejorar. Es como si todo lo que toco se desmoronara. No sé qué hacer."
+    "FINAL MUY MALO"  # Aquí puedes añadir la descripción de cómo el final es realmente pésimo debido a la sobrecarga de puntos negativos
+    return
+
+# =============================================================================================================================================
+
 # **Final triste**
 label final_triste:
     yuki "Las vacaciones han sido un reflejo de todo lo que siento... Estoy más solo que nunca, y no sé si puedo seguir adelante."
+    "FINAL TRISTE"
     return
 
-# **Final positivo**
+# =============================================================================================================================================
+
+# **Final positivo** 
 label final_positivo:
     yuki "Aunque aún me siento triste a veces, he aprendido a dar pequeños pasos. Mis amigos me apoyaron, y sé que no estoy solo."
+    "FINAL POSITIVO"
     return
+
+# =============================================================================================================================================
 
 # **Final neutro**
 label final_neutro:
     yuki "No estoy mejor ni peor. Las vacaciones fueron difíciles, pero al menos ahora sé que debo seguir adelante, paso a paso."
+    "FINAL NEUTRO"
     return
