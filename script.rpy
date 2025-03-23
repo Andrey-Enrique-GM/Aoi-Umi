@@ -20,6 +20,9 @@ label start:
     # Muestra la pantalla de puntos (depresion) en todo momento
     show screen depresion_counter
 
+    # Musica feliz en bucle
+    play music "audio/ambiente-feliz.wav"
+
     # Introduccion
     scene bg school
     yuki "Hoy es el último día antes de las vacaciones. Me siento extraño... no estoy seguro si quiero que lleguen."
@@ -29,8 +32,9 @@ label start:
 
     yuki "Las vacaciones comenzarán, pero algo no se siente bien."
 
-    # Aumenta los puntos (Tristeza) por la despedida???
+    # Aumenta los puntos (Tristeza) por la despedida??? y reproduce un sonidito
     $ puntos += 20
+    play sound "audio/points-0.wav"
 
     jump dia_1
 
